@@ -5,6 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>לוח שנה · תוכנית מופת · ישיבת בני עקיבא חדרה</title>
 <link rel="icon" href="logo.jpg">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#1f5a8a">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="לוח מופת">
 <meta name="description" content="לוח שנה, מערכת שעות, מבחנים וחופשות – תוכנית מופת">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -523,6 +529,7 @@ function render(){
   let h='';
   h+='<div class="top"><img class="logo" src="logo.jpg" alt="ישיבת בני עקיבא חדרה"><div class="ttl"><h1>'+esc(cfg().program||'תוכנית מופת')+' · לוח שנה</h1><small>'+esc(cfg().school||'')+(cfg().school?' · ':'')+'תאריך עברי ולועזי · מערכת שעות · מבחנים · חופשות</small></div>';
   h+='<select class="sel" id="yearSel" title="שנת לימודים">'+years.map(y=>'<option value="'+y+'"'+(y===S.year?' selected':'')+'>שנת הלימודים '+hYearStr(y)+'</option>').join('')+'</select>';
+  if(!window.matchMedia('(display-mode: standalone)').matches&&!navigator.standalone)h+='<button class="btn" data-act="install">📲 התקנה בטלפון</button>';
   h+='<button class="btn" data-act="export">📅 ליומן גוגל</button>';
   if(cfg().eventsSheetEdit)h+='<a class="btn" href="'+esc(cfg().eventsSheetEdit)+'" target="_blank" rel="noopener" title="לבעלי הרשאה: הוספת אירועים ומבחנים">✏️ ניהול אירועים</a>';
   if(S.isAdmin)h+='<button class="btn" data-act="manage">⚙️ ניהול כיתות</button>';
@@ -999,6 +1006,19 @@ function readManage(){
   c.rules={};m.querySelectorAll('#m_rules .pill').forEach(b=>c.rules[b.dataset.r]=b.classList.contains('on'));
   return c;
 }
+let deferredInstall=null;
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredInstall=e});
+window.addEventListener('appinstalled',()=>{deferredInstall=null;render()});
+if('serviceWorker' in navigator&&location.protocol.startsWith('http'))navigator.serviceWorker.register('sw.js').catch(()=>{});
+async function installApp(){
+  if(deferredInstall){deferredInstall.prompt();try{await deferredInstall.userChoice}catch(e){}deferredInstall=null;return}
+  const ios=/iphone|ipad|ipod/i.test(navigator.userAgent);
+  let h='<h2>התקנה בטלפון</h2><div class="sub">האתר יופיע כאפליקציה במסך הבית, עם הסמל של הישיבה</div>';
+  h+=ios?'<div class="kv"><b>אייפון</b><span>פתחו את האתר ב-Safari, לחצו על כפתור השיתוף (ריבוע עם חץ למעלה), ובחרו "הוסף למסך הבית".</span></div>'
+        :'<div class="kv"><b>אנדרואיד</b><span>פתחו את האתר ב-Chrome, לחצו על שלוש הנקודות בפינה ובחרו "התקן אפליקציה" או "הוסף למסך הבית".</span></div>';
+  h+='<div class="acts"><button class="btn primary" data-act="close">הבנתי</button></div>';
+  openModal(h);
+}
 function helpModal(){
   let h='<h2>איך זה עובד?</h2><div class="sub">לוח פתוח לצוות ולהורים, בלי הרשמה</div>';
   h+='<div class="kv"><b>כיתה</b><span>בחרו את הכיתה בשורת הכפתורים — המערכת, האירועים והמבחנים יסוננו לכיתה שלכם.</span><b>תאריכים</b><span>בכל יום מוצגים התאריך העברי והלועזי. חגים וחופשות מחושבים לפי הלוח העברי.</span><b>יומן גוגל</b><span>לחצו על אירוע ← "הוספה ליומן גוגל שלי" והוא יישמר ביומן הפרטי שלכם. את כל הלוח אפשר לייבא מקובץ בכפתור "ליומן גוגל".</span><b>פנייה לצוות</b><span>מתחת לבחירת הכיתה: מייל או וואטסאפ למחנך ולרכזת התוכנית.</span></div>';
@@ -1019,6 +1039,7 @@ document.addEventListener('click',async ev=>{
   if(act){
     const a=act.dataset.act;
     if(a==='close')closeModal();
+    else if(a==='install')installApp();
     else if(a==='export')exportModal();
     else if(a==='help')helpModal();
     else if(a==='manage')manageModal();
