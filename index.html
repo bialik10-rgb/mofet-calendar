@@ -200,6 +200,89 @@ a.btn{text-decoration:none}
 .btn.wa{background:#25d366;border-color:#25d366;color:#053b1a}
 .btn.wa:hover{color:#053b1a;filter:brightness(1.05)}
 .foot{text-align:center;color:var(--mute);font-size:12.5px;margin-top:26px}
+
+/* ===== שדרוג עיצוב ===== */
+body{background:var(--bg) radial-gradient(900px 420px at 100% -80px,color-mix(in srgb,var(--brand2) 16%,transparent),transparent 70%),radial-gradient(700px 380px at 0% 0%,color-mix(in srgb,var(--accent) 14%,transparent),transparent 70%);background-attachment:fixed;font-variant-numeric:tabular-nums}
+.top{background:linear-gradient(135deg,var(--card),color-mix(in srgb,var(--brand2) 9%,var(--card)));border-radius:22px;padding:14px 18px;margin-bottom:14px;box-shadow:var(--shadow);border:1px solid color-mix(in srgb,var(--brand2) 18%,var(--line))}
+.ttl h1{background:linear-gradient(90deg,var(--brand),var(--brand2) 60%,var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent}
+.card.today{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='none' stroke='%23ffffff' stroke-opacity='.07' stroke-width='2'%3E%3Cpath d='M0 60 Q30 20 60 60 T120 60'/%3E%3Cpath d='M0 90 Q30 50 60 90 T120 90'/%3E%3Ccircle cx='96' cy='24' r='14'/%3E%3C/g%3E%3C/svg%3E"),linear-gradient(135deg,#143f66 0%,#1f6f9c 55%,#6f9a3a 130%)}
+.card{border:1px solid color-mix(in srgb,var(--line) 70%,transparent)}
+.tab.on{background:linear-gradient(180deg,var(--card),color-mix(in srgb,var(--brand2) 10%,var(--card)));box-shadow:var(--shadow),inset 0 -3px 0 var(--brand2)}
+.item{transition:transform .15s,box-shadow .15s}.item:hover{transform:translateY(-2px)}
+.wday,.cell{transition:background .15s}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes slideIn{from{opacity:0;transform:translateX(-14px)}to{opacity:1;transform:none}}
+.hero>*,.contacts>*,.brief,.nn{animation:fadeUp .45s both}
+.hero>*:nth-child(2){animation-delay:.08s}
+#view>*{animation:fadeUp .35s both}
+.lst>.item{animation:fadeUp .35s both}
+.lst>.item:nth-child(2){animation-delay:.04s}.lst>.item:nth-child(3){animation-delay:.08s}.lst>.item:nth-child(4){animation-delay:.12s}.lst>.item:nth-child(5){animation-delay:.16s}
+.mgrid{animation:slideIn .35s both}
+.cell:active,.wday:active{transform:scale(.99)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.hi{font-size:1.05em;margin-inline-end:3px}
+/* מקרא */
+.legend{display:flex;gap:6px 12px;flex-wrap:wrap;margin:-4px 2px 12px;font-size:12.5px;color:var(--mute)}
+.legend span{display:inline-flex;align-items:center;gap:5px;font-weight:600}
+.legend i{width:11px;height:11px;border-radius:4px;display:inline-block}
+.ev,.wev{border-inline-start:4px solid rgba(0,0,0,.22)}
+/* סינון מקצוע */
+.sbar{display:flex;gap:6px;flex-wrap:nowrap;overflow-x:auto;margin:-4px 0 12px;align-items:center;padding-bottom:4px}.sp,.sbar b{white-space:nowrap;flex:none}
+.sbar b{font-size:12.5px;color:var(--mute);margin-inline-end:2px}
+.sp{border:1.5px solid var(--line);background:var(--card);border-radius:999px;padding:3px 11px;font-size:13px;font-weight:600}
+.sp.on{background:var(--brand);border-color:var(--brand);color:#fff}
+.tt td.dim,.wl.dim{opacity:.28}
+/* עכשיו והבא */
+.nn{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.nn>div{background:rgba(255,255,255,.16);border-radius:12px;padding:8px 11px;font-size:13px;line-height:1.3}
+.nn small{display:block;opacity:.8;font-size:11.5px;font-weight:600}
+.nn b{font-size:16px;display:block}
+.nn .bar{height:5px;border-radius:4px;background:rgba(255,255,255,.25);margin-top:6px;overflow:hidden}
+.nn .bar i{display:block;height:100%;background:#fff;border-radius:4px}
+@media(max-width:480px){.nn{grid-template-columns:1fr}}
+/* השבוע הקרוב */
+.brief{margin-bottom:14px;display:grid;grid-template-columns:1.4fr 1fr;gap:14px}
+@media(max-width:820px){.brief{grid-template-columns:1fr}}
+.brief h3{margin:0 0 8px;font-size:15px}
+.bd{display:flex;gap:10px;align-items:baseline;padding:6px 0;border-top:1px solid var(--line);font-size:14px}
+.bd:first-of-type{border-top:0}
+.bd .w{min-width:62px;font-weight:700;color:var(--mute);font-size:13px}
+.bd .x{display:flex;gap:6px;flex-wrap:wrap}
+.bd .x span{color:#fff;border-radius:8px;padding:2px 9px;font-size:13px;font-weight:600;cursor:pointer}
+.nxt{display:flex;flex-direction:column;gap:6px;justify-content:center;text-align:center}
+.nxt .big{font-size:38px;font-weight:800;line-height:1;color:var(--c-exam)}
+.nxt .tt2{font-weight:700;font-size:16px}
+.nxt small{color:var(--mute)}
+/* מערכת בטלפון */
+.ttm{display:none}
+.dchips{display:flex;gap:6px;overflow-x:auto;margin-bottom:10px;padding-bottom:2px}
+.dc{border:1.5px solid var(--line);background:var(--card);border-radius:12px;padding:6px 14px;font-weight:700;white-space:nowrap}
+.dc.on{background:var(--brand);color:#fff;border-color:var(--brand)}
+.ml{display:flex;gap:10px;align-items:stretch;margin-bottom:8px}
+.ml .tm{min-width:56px;text-align:center;font-size:12px;color:var(--mute);direction:ltr;line-height:1.2;padding-top:6px}
+.ml .tm b{display:block;font-size:17px;color:var(--ink)}
+.ml .bx{flex:1;border-radius:14px;padding:10px 14px;font-weight:700;font-size:16px}
+.ml .bx small{display:block;font-weight:400;font-size:13px;opacity:.85}
+.ml.cur .bx{box-shadow:0 0 0 3px var(--brand)}
+@media(max-width:700px){
+  .ttw{display:none}.ttm{display:block}
+  .top{padding:12px}.logo{width:60px;height:60px}.ttl h1{font-size:18px}
+  .tabs{position:sticky;top:0;z-index:5}
+  .item{padding:10px}
+  .today .hb{font-size:28px}
+  .brief{gap:10px}.nxt .big{font-size:30px}
+}
+/* הדפסה */
+@media print{
+  body{background:#fff!important;color:#000}
+  .top .btn,.top select,.filters,.sbar,.tabs,.nav .btn,.nav .ib,.foot,.contacts,.hero,.brief,.legend,#modalRoot,.toast,.dchips{display:none!important}
+  .top{box-shadow:none;border:0;background:none}
+  .ttw{display:block!important}.ttm{display:none!important}
+  .card,.wday,.item,.mgrid{box-shadow:none!important;break-inside:avoid}
+  .tt{min-width:0}
+  *{animation:none!important}
+  @page{size:A4 landscape;margin:10mm}
+}
 </style>
 </head>
 <body>
@@ -368,6 +451,21 @@ const classesOfYear=H=>(cfg().classes||[]).filter(c=>c.year===H&&!c.archived);
 const clsById=id=>(cfg().classes||[]).find(c=>c.id===id);
 const rules=()=>cfg().rules||{};
 const allEvents=()=>Object.values(S.events).concat(S.staffEvents);
+
+S.subj='';S.ttDay=(function(){const d=new Date().getDay();return d>5?0:d})();
+try{S.alarm=localStorage.getItem('mofet-alarm')||'1d'}catch(e){S.alarm='1d'}
+const HOLICON=[['ראש השנה','🍎'],['יום כיפור','🕊️'],['סוכות','🌿'],['הושענא','🌿'],['שמחת תורה','📜'],['שמיני עצרת','📜'],['חנוכה','🕎'],['נר ','🕎'],['פורים','🎭'],['תענית אסתר','📖'],['פסח','🍷'],['שביעי של פסח','🌊'],['שבועות','🌾'],['העצמאות','🇮🇱'],['הזיכרון','🕯️'],['השואה','🕯️'],['ירושלים','🏛️'],['ל״ג','🔥'],['לג','🔥'],['ט״ו בשבט','🌳'],['טו בשבט','🌳'],['ראש חודש','🌙'],['תשעה באב','🕯️'],['צום','⏳'],['קיץ','☀️']];
+function holIcon(n){n=String(n||'');for(const x of HOLICON)if(n.includes(x[0]))return '<span class="hi">'+x[1]+'</span>';return ''}
+function subjectsList(){
+  const set={};
+  visibleEventsNoSubj().forEach(e=>{if(e.subject)set[normName(e.subject)]=e.subject});
+  const t=S.tt[S.cls];if(t&&t.cells)Object.values(t.cells).forEach(c=>{if(c&&c.s)set[normName(c.s)]=c.s});
+  return Object.values(set).sort((a,b)=>a.localeCompare(b,'he'));
+}
+function visibleEventsNoSubj(){
+  const save=S.subj;S.subj='';const r=visibleEvents();S.subj=save;return r;
+}
+function subjOk(e){return !S.subj||normName(e.subject)===normName(S.subj)}
 function visibleEvents(){
   const out=[];
   const list=Object.values(S.events).concat(S.isStaff?Object.values(S.staffEvents):[]);
@@ -376,6 +474,7 @@ function visibleEvents(){
 }
 function matchCls(e){
   const ids=e.classIds||[];
+  if(!subjOk(e))return false;
   if(S.cls==='all')return true;
   return !ids.length||ids.includes(S.cls);
 }
@@ -437,6 +536,48 @@ function eventsFromSheet(text){
   });
   return out;
 }
+
+function parseHeYear(v){
+  v=String(v||'').trim();if(/^\d{4}$/.test(v))return +v;
+  const V={'א':1,'ב':2,'ג':3,'ד':4,'ה':5,'ו':6,'ז':7,'ח':8,'ט':9,'י':10,'כ':20,'ך':20,'ל':30,'מ':40,'ם':40,'נ':50,'ן':50,'ס':60,'ע':70,'פ':80,'ף':80,'צ':90,'ץ':90,'ק':100,'ר':200,'ש':300,'ת':400};
+  let n=0;for(const ch of v.replace(/[׳'"״\s]/g,''))n+=V[ch]||0;return n>0&&n<1000?5000+n:0;
+}
+const DAYIDX={'א':0,'ב':1,'ג':2,'ד':3,'ה':4,'ו':5};
+function h36(t){let h=5381;for(const c of t)h=((h<<5)+h+c.charCodeAt(0))>>>0;return h.toString(36)}
+function classesFromSheet(text){
+  const rows=parseCsv(text).filter(r=>r.some(x=>x&&x.trim())).slice(1);const out=[];
+  rows.forEach((r,i)=>{
+    const [name,grade,year,home,email,wa,color]=r.map(x=>(x||'').trim());if(!name)return;
+    const y=parseHeYear(year)||currentYearH();
+    out.push({id:'x'+h36(normName(name)+'_'+y),name,grade:grade||gradeOf(name),year:y,color:color||PALETTE[i%PALETTE.length],homeroom:home,
+      contact:{name:home,title:'מחנך כיתה '+name,email,whatsapp:String(wa||'').replace(/\D/g,'').replace(/^0/,'972')}});
+  });
+  return out;
+}
+function ttFromSheet(text){
+  const rows=parseCsv(text).filter(r=>r.some(x=>x&&x.trim())).slice(1);const out={};
+  for(const r of rows){
+    const [cn,day,per,subj,teach,room]=r.map(x=>(x||'').trim());if(!cn||!subj)continue;
+    const dn=normName(day);let d=DAYIDX[dn[0]];if(d==null&&/^[1-6]$/.test(dn))d=+dn-1;
+    const p=parseInt(per,10);if(d==null||!(p>=1))continue;
+    const c=(cfg().classes||[]).find(x=>normName(x.name)===normName(cn)&&!x.archived);if(!c)continue;
+    (out[c.id]=out[c.id]||{cells:{}}).cells[d+'_'+(p-1)]={s:subj,t:teach,r:room};
+  }
+  return out;
+}
+function sheetTab(name){return S.cfg.eventsSheetCsv.replace(/sheet=[^&]*/,'sheet='+encodeURIComponent(name))}
+function loadExtraSheets(){
+  const get=n=>fetch(sheetTab(n)).then(r=>r.ok?r.text():Promise.reject());
+  get('כיתות').then(t=>{
+    const have=cfg().classes||[];S.cfg.classes=have;
+    for(const c of classesFromSheet(t)){if(!have.some(x=>normName(x.name)===normName(c.name)&&x.year===c.year))have.push(c)}
+    return get('מערכת').then(tt=>{const m=ttFromSheet(tt);Object.keys(m).forEach(id=>{S.tt[id]=S.tt[id]||{cells:{}};Object.assign(S.tt[id].cells,m[id].cells)})}).catch(()=>{});
+  }).then(()=>{
+    const cs=classesOfYear(S.year);
+    if(S.cls==='all'&&cs.length===1)S.cls=cs[0].id;
+    render();
+  }).catch(()=>{});
+}
 function boot(){
   const D=window.MOFET_DATA||{cfg:{},tt:{},events:{}};
   S.cfg=D.cfg;S.cfgLoaded=true;S.tt=D.tt||{};
@@ -448,6 +589,7 @@ function boot(){
   render();
   if(S.cfg.eventsSheetCsv){
     fetch(S.cfg.eventsSheetCsv).then(r=>r.ok?r.text():Promise.reject()).then(t=>{Object.assign(S.events,eventsFromSheet(t));render()}).catch(()=>{S.sheetErr=true;render()});
+    loadExtraSheets();
   }
 }
 /* =====================================================================
@@ -512,6 +654,101 @@ function buildCsv(opt){
   return '﻿'+rows.map(r=>r.map(csvCell).join(',')).join('\r\n');
 }
 
+
+/* ===== ICS עם תזכורות ===== */
+const ALARMS=[['none','ללא תזכורת'],['1h','שעה לפני'],['1d','יום לפני'],['2d','יומיים לפני'],['1w','שבוע לפני']];
+function icsEsc(x){return String(x==null?'':x).replace(/\\/g,'\\\\').replace(/;/g,'\;').replace(/,/g,'\\,').replace(/\r?\n/g,'\\n')}
+function icsAlarm(timed,opt){
+  const m={'1h':[ 'PT1H','PT1H' ],'1d':['P1D','PT6H'],'2d':['P2D','P1DT6H'],'1w':['P7D','P6DT6H']}[opt];
+  return m?(timed?m[0]:m[1]):null;
+}
+function icsFold(l){const out=[];while(l.length>73){out.push(l.slice(0,73));l=' '+l.slice(73)}out.push(l);return out.join('\r\n')}
+function buildIcs(list,opt){
+  const L=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Mofet Calendar//HE','CALSCALE:GREGORIAN','METHOD:PUBLISH','X-WR-CALNAME:'+icsEsc(cfg().program||'תוכנית מופת'),'X-WR-TIMEZONE:Asia/Jerusalem'];
+  const st=new Date().toISOString().replace(/[-:]/g,'').replace(/\.\d+/,'');
+  for(const e of list){
+    const t=evTimes(e);const T=TYPES[e.type]||TYPES.other;
+    L.push('BEGIN:VEVENT','UID:'+icsEsc(e.id)+'-'+e.date+'@mofet-calendar','DTSTAMP:'+st);
+    if(t.timed){L.push('DTSTART;TZID=Asia/Jerusalem:'+e.date.replace(/-/g,'')+'T'+e.start.replace(':','')+'00','DTEND;TZID=Asia/Jerusalem:'+t.en.replace(/-/g,'')+'T'+(e.end||e.start).replace(':','')+'00')}
+    else{L.push('DTSTART;VALUE=DATE:'+e.date.replace(/-/g,''),'DTEND;VALUE=DATE:'+key(addDays(fromKey(t.en),1)).replace(/-/g,''))}
+    L.push('SUMMARY:'+icsEsc(T.e+' '+e.title),'DESCRIPTION:'+icsEsc(evDetails(e)));
+    if(e.place)L.push('LOCATION:'+icsEsc(e.place));
+    const tr=icsAlarm(t.timed,opt);
+    if(tr)L.push('BEGIN:VALARM','ACTION:DISPLAY','DESCRIPTION:'+icsEsc(e.title),'TRIGGER:-'+tr,'END:VALARM');
+    L.push('END:VEVENT');
+  }
+  L.push('END:VCALENDAR');
+  return L.map(icsFold).join('\r\n');
+}
+function saveFile(name,text,type){
+  const blob=new Blob([text],{type});const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),2000);
+}
+function setAlarm(v){S.alarm=v;try{localStorage.setItem('mofet-alarm',v)}catch(e){}}
+function alarmSelect(id){return '<select class="sel" id="'+id+'" style="padding:5px 10px;font-size:13px">'+ALARMS.map(a=>'<option value="'+a[0]+'"'+(S.alarm===a[0]?' selected':'')+'>🔔 '+a[1]+'</option>').join('')+'</select>'}
+function evShareText(e){
+  const a=fromKey(e.date),T=TYPES[e.type]||TYPES.other;
+  let t=T.e+' *'+e.title+'*\n📅 '+gStr(a,{wd:true,year:true})+' · '+hStr(a);
+  if(e.endDate&&e.endDate>e.date){const b=fromKey(e.endDate);t+=' עד '+gStr(b,{year:false})}
+  if(e.start&&!e.allDay)t+='\n⏰ '+e.start+(e.end?'–'+e.end:'');
+  if(e.place)t+='\n📍 '+e.place;
+  if(e.notes)t+='\n'+e.notes;
+  t+='\n\nלוח '+(cfg().program||'מופת')+': '+location.href.split('#')[0].split('?')[0];
+  return t;
+}
+function feedUrl(){
+  if(!/^https?:/.test(location.protocol))return '';
+  const base=location.origin+location.pathname.replace(/[^/]*$/,'');
+  return base+(S.cls!=='all'?'calendar-'+S.cls+'.ics':'calendar.ics');
+}
+function briefHtml(){
+  const now=new Date();now.setHours(12,0,0,0);
+  let rows='';let any=false;
+  for(let i=0;i<7;i++){
+    const d=addDays(now,i),k=key(d);const evs=eventsOn(k).filter(e=>e.type!=='vacation'||true);
+    const di=dayInfo(d,rules());const hol=di.items.filter(x=>x.t!=='rc'&&x.t!=='school');
+    if(!evs.length&&!hol.length)continue;any=true;
+    rows+='<div class="bd"><span class="w">'+(i===0?'היום':i===1?'מחר':'יום '+WD[d.getDay()])+'<br><small style="font-weight:400">'+d.getDate()+'.'+(d.getMonth()+1)+'</small></span><span class="x">'
+      +hol.map(it=>'<span style="background:var(--c-vac);cursor:default">'+holIcon(it.n)+esc(it.n)+'</span>').join('')
+      +evs.map(e=>{const T=TYPES[e.type]||TYPES.other;return '<span style="background:'+T.c+'" data-ev="'+esc(e.id)+'" data-c="'+esc(e._c)+'">'+T.e+' '+esc(e.title)+(e.start&&!e.allDay?' · '+esc(e.start):'')+'</span>'}).join('')+'</span></div>';
+  }
+  let nx=null;
+  for(let i=0;i<120&&!nx;i++){const d=addDays(now,i);const x=eventsOn(key(d)).find(e=>e.type==='exam'&&(e.date===key(d)||i===0));if(x)nx={e:x,i}}
+  let r='<div class="brief"><div class="card"><h3>📌 מה יש בשבוע הקרוב'+(S.cls!=='all'&&clsById(S.cls)?' · '+esc(clsById(S.cls).name):'')+(S.subj?' · '+esc(S.subj):'')+'</h3>'+(any?rows:'<div class="hint">שבוע שקט, אין אירועים בשבעת הימים הקרובים. 🌿</div>')+'</div>';
+  r+='<div class="card nxt">'+(nx?'<small>המבחן הבא</small><div class="big">'+(nx.i===0?'היום':nx.i)+'</div><small>'+(nx.i===0?'':nx.i===1?'יום אחד':'ימים')+'</small><div class="tt2" data-ev="'+esc(nx.e.id)+'" data-c="'+esc(nx.e._c)+'" style="cursor:pointer">📝 '+esc(nx.e.title)+'</div><small>'+gStr(fromKey(nx.e.date),{wd:true,year:false})+(nx.e.subject?' · '+esc(nx.e.subject):'')+'</small>':'<small>המבחן הבא</small><div class="tt2">אין מבחנים מתוכננים</div><small>בהמשך יופיעו כאן עם ספירה לאחור</small>')+'</div></div>';
+  return r;
+}
+function legendHtml(){
+  return '<div class="legend">'+Object.keys(TYPES).map(t=>'<span><i style="background:'+TYPES[t].c+'"></i>'+TYPES[t].e+' '+TYPES[t].n+'</span>').join('')+'</div>';
+}
+function nowNextHtml(){
+  if(S.cls==='all')return '';
+  const now=new Date();if(now.getDay()>5||isOffForClass(now))return '';
+  const L=lessonsFor(S.cls,now.getDay());if(!L.length)return '';
+  const m=nowMin();
+  const win=x=>{const s=toMin(x.p.s),e=x.p.e?toMin(x.p.e):s+40;return [s,e]};
+  let cur=null,nxt=null;
+  for(const x of L){const [s,e]=win(x);if(m>=s&&m<e){cur=x}else if(s>m&&!nxt)nxt=x}
+  if(cur&&!nxt){const ix=L.indexOf(cur);nxt=L[ix+1]||null}
+  if(!cur&&!nxt)return '<div class="nn" style="grid-template-columns:1fr"><div><b>סיימנו להיום 🎉</b><small>נתראה בשיעור הבא</small></div></div>';
+  let h='<div class="nn">';
+  if(cur){const [s,e]=win(cur);const pct=Math.max(0,Math.min(100,Math.round((m-s)/(e-s)*100)));
+    h+='<div><small>עכשיו · שיעור '+(cur.i+1)+'</small><b>'+esc(cur.c.s)+'</b>'+esc([cur.c.t,cur.c.r].filter(Boolean).join(' · '))+'<div class="bar"><i style="width:'+pct+'%"></i></div><small style="margin-top:3px">עד '+esc(cur.p.e||'')+'</small></div>'}
+  else if(m<win(L[0])[0]){h+='<div><small>השיעור הראשון</small><b>'+esc(L[0].c.s)+'</b>'+esc(L[0].c.t||'')+'<small style="margin-top:3px">מתחיל ב-'+esc(L[0].p.s)+'</small></div>';nxt=L[1]||null}
+  if(nxt)h+='<div><small>הבא · שיעור '+(nxt.i+1)+'</small><b>'+esc(nxt.c.s)+'</b>'+esc([nxt.c.t,nxt.c.r].filter(Boolean).join(' · '))+'<small style="margin-top:3px">ב-'+esc(nxt.p.s)+'</small></div>';
+  return h+'</div>';
+}
+function ttMobileHtml(){
+  const L=lessonsFor(S.cls,S.ttDay);const m=nowMin();const isToday=new Date().getDay()===S.ttDay&&!isOffForClass(new Date());
+  let h='<div class="ttm"><div class="dchips">'+[0,1,2,3,4,5].map(d=>'<button class="dc'+(S.ttDay===d?' on':'')+'" data-ttd="'+d+'">'+WD[d]+(d===5?' (רשות)':'')+'</button>').join('')+'</div>';
+  if(!L.length)h+='<div class="card empty"><b>אין שיעורים</b>'+(S.ttDay===5?'יום שישי הוא יום רשות.':'ביום הזה לא הוזנו שיעורים.')+'</div>';
+  for(const x of L){
+    const col=subjColor(x.c.s);const s=toMin(x.p.s),e=x.p.e?toMin(x.p.e):s+40;
+    h+='<div class="ml'+(isToday&&m>=s&&m<e?' cur':'')+'"><div class="tm"><b>'+(x.i+1)+'</b>'+esc(x.p.s)+(x.p.e?'<br>'+esc(x.p.e):'')+'</div><div class="bx" style="background:'+col.bg+';color:'+col.fg+'">'+esc(x.c.s)+(x.c.t||x.c.r?'<small>'+esc([x.c.t,x.c.r].filter(Boolean).join(' · '))+'</small>':'')+'</div></div>';
+  }
+  return h+'</div>';
+}
+
 /* =====================================================================
    5. תצוגה
    ===================================================================== */
@@ -531,6 +768,7 @@ function render(){
   h+='<select class="sel" id="yearSel" title="שנת לימודים">'+years.map(y=>'<option value="'+y+'"'+(y===S.year?' selected':'')+'>שנת הלימודים '+hYearStr(y)+'</option>').join('')+'</select>';
   if(!window.matchMedia('(display-mode: standalone)').matches&&!navigator.standalone)h+='<button class="btn" data-act="install">📲 התקנה בטלפון</button>';
   h+='<button class="btn" data-act="export">📅 ליומן גוגל</button>';
+  h+='<button class="btn" data-act="print" title="הדפסה או שמירה כ-PDF">🖨️ הדפסה</button>';
   if(cfg().eventsSheetEdit)h+='<a class="btn" href="'+esc(cfg().eventsSheetEdit)+'" target="_blank" rel="noopener" title="לבעלי הרשאה: הוספת אירועים ומבחנים">✏️ ניהול אירועים</a>';
   if(S.isAdmin)h+='<button class="btn" data-act="manage">⚙️ ניהול כיתות</button>';
   h+='<button class="btn ghost" data-act="help" title="איך זה עובד">❓</button>';
@@ -542,10 +780,12 @@ function render(){
     if(S.isAdmin)h+='<button class="cls" data-act="addclass" style="border-style:dashed">＋ כיתה</button>';
     h+='</div>';
   }
+  {const sl=subjectsList();if(sl.length>1)h+='<div class="sbar"><b>מקצוע:</b><button class="sp'+(S.subj?'':' on')+'" data-subj="">הכול</button>'+sl.map(x=>'<button class="sp'+(S.subj&&normName(S.subj)===normName(x)?' on':'')+'" data-subj="'+esc(x)+'">'+esc(x)+'</button>').join('')+'</div>'}
   h+=contactsHtml(classes);
+  h+=briefHtml();
   const tabs=[['agenda','📋 הקרוב'],['month','🗓️ חודש'],['week','📆 שבוע'],['tt','⏰ מערכת שעות'],['exams','📝 מבחנים והגשות'],['vac','🏖️ חופשות וחגים']];
   h+='<div class="tabs">'+tabs.map(t=>'<button class="tab'+(S.tab===t[0]?' on':'')+'" data-tab="'+t[0]+'">'+t[1]+'</button>').join('')+'</div>';
-  h+='<div id="view">'+viewHtml()+'</div>';
+  h+=(S.tab==='month'||S.tab==='week'||S.tab==='agenda'?legendHtml():'')+'<div id="view">'+viewHtml()+'</div>';
   h+='<div class="foot">תוכנית מופת · תאריכים עבריים מחושבים אוטומטית · חופשות לפי לוח משרד החינוך · לעדכון הלוח פנו למחנך</div>';
   app.innerHTML=h;
 }
@@ -621,10 +861,10 @@ function heroHtml(classes){
   for(const x of up.slice(0,4)){
     if(x.e){const T=TYPES[x.e.type]||TYPES.other;
       u+='<div class="upi" data-ev="'+esc(x.e.id)+'" data-c="'+esc(x.e._c)+'"><span class="dot" style="background:'+T.c+'"></span><div class="t">'+esc(x.e.title)+'<small>'+gStr(fromKey(x.e.date),{year:false})+' · '+hStr(fromKey(x.e.date))+'</small></div><div class="cd">'+cdText(x.i)+'</div></div>'}
-    else u+='<div class="upi"><span class="dot" style="background:var(--c-vac)"></span><div class="t">'+esc(x.h.n)+'<small>'+gStr(x.d,{year:false})+' · '+hStr(x.d)+'</small></div><div class="cd">'+cdText(x.i)+'</div></div>';
+    else u+='<div class="upi"><span class="dot" style="background:var(--c-vac)"></span><div class="t">'+holIcon(x.h.n)+esc(x.h.n)+'<small>'+gStr(x.d,{year:false})+' · '+hStr(x.d)+'</small></div><div class="cd">'+cdText(x.i)+'</div></div>';
   }
   u+='</div>';
-  return '<div class="hero"><div class="card today"><div class="lbl">היום · '+WD[now.getDay()]+'</div><div class="hb">'+hStr(now,{year:true})+'</div><div class="gr">'+gStr(now,{year:true})+'</div><div class="tags">'+tags+'</div>'+(evs.length?'<div class="tags">'+evs.map(e=>'<span class="tag">'+(TYPES[e.type]?TYPES[e.type].e:'')+' '+esc(e.title)+'</span>').join('')+'</div>':'')+les+'</div>'+u+'</div>';
+  return '<div class="hero"><div class="card today"><div class="lbl">היום · '+WD[now.getDay()]+'</div><div class="hb">'+hStr(now,{year:true})+'</div><div class="gr">'+gStr(now,{year:true})+'</div><div class="tags">'+tags+'</div>'+nowNextHtml()+(evs.length?'<div class="tags">'+evs.map(e=>'<span class="tag">'+(TYPES[e.type]?TYPES[e.type].e:'')+' '+esc(e.title)+'</span>').join('')+'</div>':'')+les+'</div>'+u+'</div>';
 }
 function cdText(i){return i===0?'היום':i===1?'מחר':i===2?'מחרתיים':'בעוד '+i+' ימים'}
 
@@ -662,7 +902,7 @@ function monthHtml(){
     let inner='<div class="n"><span class="g">'+d.getDate()+'</span><span class="h">'+hShort(d)+'</span></div>';
     const main=named.filter(x=>x.t!=='rc').slice(0,2);
     const rc=named.find(x=>x.t==='rc');
-    for(const it of main)inner+='<div class="hol '+it.t+'">'+esc(it.n)+'</div>';
+    for(const it of main)inner+='<div class="hol '+it.t+'">'+holIcon(it.n)+esc(it.n)+'</div>';
     if(rc&&!main.length)inner+='<div class="hol rc">'+esc(rc.n)+'</div>';
     if(di.summer&&d.getDate()===1&&d.getMonth()===6)inner+='<div class="hol">חופשת הקיץ</div>';
     const shown=evs.slice(0,3);
@@ -690,10 +930,10 @@ function weekHtml(){
     const d=addDays(ws,i),k=key(d),di=dayInfo(d,rules()),evs=eventsOn(k);
     const off=isOffForClass(d);
     h+='<div class="wday'+(off?' off':'')+(k===todayK?' today':'')+'" data-day="'+k+'" style="cursor:pointer"><div class="wh"><b>'+WD[i]+' '+d.getDate()+'</b><small>'+hStr(d)+'</small></div>'+(i===5&&!off?'<div class="fri" style="margin-bottom:6px">יום רשות</div>':'');
-    for(const it of di.items.filter(x=>x.t!=='rc'&&x.t!=='school'))h+='<div class="whol">'+esc(it.n)+'</div>';
+    for(const it of di.items.filter(x=>x.t!=='rc'&&x.t!=='school'))h+='<div class="whol">'+holIcon(it.n)+esc(it.n)+'</div>';
     if(di.summer)h+='<div class="whol">חופשת הקיץ</div>';
     for(const e of evs){const T=TYPES[e.type]||TYPES.other;h+='<div class="wev" style="background:'+T.c+'" data-ev="'+esc(e.id)+'" data-c="'+esc(e._c)+'">'+T.e+' '+esc(e.title)+(e.start&&!e.allDay?'<small>'+esc(e.start)+(e.end?'–'+esc(e.end):'')+'</small>':'')+'</div>'}
-    if(!off&&S.cls!=='all'){for(const x of lessonsFor(S.cls,i)){const c=subjColor(x.c.s);h+='<div class="wl" style="background:'+c.bg+';color:'+c.fg+'"><b>'+(x.i+1)+'</b>'+esc(x.c.s)+'<small style="color:inherit;opacity:.7">'+(x.c.t?esc(x.c.t):'')+'</small></div>'}}
+    if(!off&&S.cls!=='all'){for(const x of lessonsFor(S.cls,i)){const c=subjColor(x.c.s);h+='<div class="wl'+(S.subj&&normName(x.c.s)!==normName(S.subj)?' dim':'')+'" style="background:'+c.bg+';color:'+c.fg+'"><b>'+(x.i+1)+'</b>'+esc(x.c.s)+'<small style="color:inherit;opacity:.7">'+(x.c.t?esc(x.c.t):'')+'</small></div>'}}
     h+='</div>';
   }
   return h+'</div>';
@@ -716,12 +956,13 @@ function ttHtml(){
     h+='<tr><th class="per"><b>'+(i+1)+'</b>'+(p.s?'<span dir="ltr">'+esc(p.s)+(p.e?'–'+esc(p.e):'')+'</span>':'שיעור')+'</th>';
     for(let d=0;d<6;d++){
       const cell=t&&t.cells&&t.cells[d+'_'+i];
-      if(cell&&cell.s){const col=subjColor(cell.s);h+='<td class="f'+(S.isStaff?' edit':'')+(d===wdNow?' cur':'')+'" data-cell="'+d+'_'+i+'" style="background:'+col.bg+';color:'+col.fg+'">'+esc(cell.s)+(cell.t||cell.r?'<small>'+esc([cell.t,cell.r].filter(Boolean).join(' · '))+'</small>':'')+'</td>'}
+      if(cell&&cell.s){const col=subjColor(cell.s);h+='<td class="f'+(S.isStaff?' edit':'')+(d===wdNow?' cur':'')+(S.subj&&normName(cell.s)!==normName(S.subj)?' dim':'')+'" data-cell="'+d+'_'+i+'" style="background:'+col.bg+';color:'+col.fg+'">'+esc(cell.s)+(cell.t||cell.r?'<small>'+esc([cell.t,cell.r].filter(Boolean).join(' · '))+'</small>':'')+'</td>'}
       else h+='<td'+(S.isStaff?' class="edit" data-cell="'+d+'_'+i+'"':'')+'>'+(S.isStaff?'<span style="opacity:.35">＋</span>':'')+'</td>';
     }
     h+='</tr>';
   });
   h+='</tbody></table></div>';
+  h+=ttMobileHtml();
   h+=bellsHtml();
   if(!t||!t.cells||!Object.keys(t.cells).length)h+='<div class="hint" style="margin-top:10px">'+(S.isStaff?'המערכת עדיין ריקה — לחצו על משבצת כדי להתחיל.':'המערכת עדיין לא הוזנה על ידי הצוות.')+'</div>';
   return h;
@@ -813,7 +1054,7 @@ function agendaHtml(){
     if(!evs.length&&!hol.length)continue;
     any=true;
     h+='<div class="item" style="border-inline-start-color:'+(evs[0]?(TYPES[evs[0].type]||TYPES.other).c:'var(--c-vac)')+';cursor:default" data-day="'+k+'"><div class="db"><b>'+d.getDate()+'</b><small>'+WD[d.getDay()]+'</small><small>'+hStr(d)+'</small></div><div class="mid">';
-    for(const it of hol)h+='<div class="t" style="color:var(--c-vac)">'+(it.off?'🏖️ ':'🕯️ ')+esc(it.n)+'</div>';
+    for(const it of hol)h+='<div class="t" style="color:var(--c-vac)">'+(holIcon(it.n)||(it.off?'🏖️ ':'🕯️ '))+esc(it.n)+'</div>';
     for(const e of evs){const T=TYPES[e.type]||TYPES.other;h+='<div class="t" style="cursor:pointer" data-ev="'+esc(e.id)+'" data-c="'+esc(e._c)+'">'+T.e+' '+esc(e.title)+' <span class="s" style="font-weight:400">'+(e.start&&!e.allDay?esc(e.start)+' · ':'')+esc(T.n)+(e.subject?' · '+esc(e.subject):'')+'</span></div>'}
     h+='</div><div class="cd">'+cdText(i)+'</div></div>';
   }
@@ -862,6 +1103,7 @@ function evModal(id,c){
   if(e.place)h+='<b>מקום</b><span>'+esc(e.place)+'</span>';
   if(e.notes)h+='<b>הערות</b><span style="white-space:pre-wrap">'+esc(e.notes)+'</span>';
   h+='</div><div class="acts"><a class="btn primary" href="'+esc(gcalLink(e))+'" target="_blank" rel="noopener">📅 הוספה ליומן גוגל שלי</a>';
+  h+='</div><div class="acts" style="margin-top:8px;align-items:center">'+alarmSelect('x_alarm')+'<button class="btn" data-act="evics" data-id="'+esc(e.id)+'" data-c="'+esc(c)+'">🔔 קובץ ליומן עם תזכורת</button><a class="btn wa" href="'+esc(waLink('',evShareText(e)).replace('https://wa.me/?','https://wa.me/?'))+'" target="_blank" rel="noopener">💬 שיתוף בוואטסאפ</a></div><div class="acts" style="margin-top:8px">';
   if(S.isStaff)h+='<button class="btn" data-act="editev" data-id="'+esc(e.id)+'" data-c="'+esc(c)+'">✏️ עריכה</button><button class="btn danger" data-act="delev" data-id="'+esc(e.id)+'" data-c="'+esc(c)+'">מחיקה</button>';
   h+='<button class="btn ghost" data-act="close">סגירה</button></div>';
   openModal(h);
@@ -949,6 +1191,8 @@ function exportModal(){
   h+='<div class="fld" style="margin-top:8px"><label>מה לכלול?</label><div class="pills" id="x_types">'+Object.keys(TYPES).map(t=>'<button type="button" class="pill on" data-t="'+t+'">'+TYPES[t].e+' '+TYPES[t].n+'</button>').join('')+'</div></div>';
   h+='<div class="fld"><label><input type="checkbox" id="x_hol" checked> גם חגים וחופשות (🕎)</label><label style="margin-top:4px"><input type="checkbox" id="x_min"> גם ימים מיוחדים (ט״ו בשבט, ל״ג בעומר, ימי זיכרון…)</label></div>';
   h+='<ol class="steps"><li>לחצו "הורדת קובץ" ושמרו אותו.</li><li><a href="https://calendar.google.com/calendar/u/0/r/settings/export" target="_blank" rel="noopener">פתחו את ההגדרות של יומן גוגל</a> ← "ייבוא".</li><li>בחרו את הקובץ ואת היומן שאליו להוסיף (מומלץ ליצור יומן חדש בשם "'+esc(cfg().program||'מופת')+'").</li></ol>';
+  h+='<div class="card" style="background:var(--soft);box-shadow:none;margin:10px 0"><b>🔔 קובץ ICS עם תזכורות</b><div class="hint">נפתח בכל יומן (גוגל, אפל, אאוטלוק) ומוסיף את האירועים שבחרתם למעלה, כל אחד עם תזכורת.</div><div class="acts" style="margin-top:8px;align-items:center">'+alarmSelect('x_alarm2')+'<button class="btn" data-act="dlics">⬇️ הורדת קובץ ICS</button></div></div>';
+  {const fu=feedUrl();if(fu){const wc=fu.replace(/^https?:/,'webcal:');h+='<div class="card" style="background:var(--soft);box-shadow:none;margin:10px 0"><b>🔄 מנוי אוטומטי (מתעדכן לבד)</b><div class="hint">מנוי אחד, והאירועים החדשים יופיעו ביומן שלכם בלי לעשות כלום. היומן המנוי: '+(S.cls==='all'?'כל הכיתות':esc((clsById(S.cls)||{}).name||''))+'. עדכונים מגיעים בדרך כלל תוך שעה עד כמה שעות.</div><div class="acts" style="margin-top:8px"><a class="btn" href="https://calendar.google.com/calendar/r?cid='+encodeURIComponent(wc)+'" target="_blank" rel="noopener">➕ מנוי ביומן גוגל</a><a class="btn" href="'+esc(wc)+'">🍎 אפל / אאוטלוק</a></div></div>'}}
   h+='<div class="acts"><button class="btn primary" data-act="dlcsv">⬇️ הורדת קובץ</button><button class="btn" data-act="copycsv">העתקה כטקסט</button><button class="btn ghost" data-act="close">סגירה</button></div><textarea class="code" id="x_out" style="display:none;margin-top:10px"></textarea>';
   openModal(h,'',m=>{m.querySelector('#x_types').addEventListener('click',ev=>{const b=ev.target.closest('.pill');if(b)b.classList.toggle('on')})});
 }
@@ -1035,12 +1279,27 @@ document.addEventListener('click',async ev=>{
   const cl=t.closest('[data-cls]');if(cl){S.cls=cl.dataset.cls;savePrefs();render();return}
   const mon=t.closest('[data-mon]');if(mon){const v=+mon.dataset.mon;if(v===0)S.month=new Date(new Date().getFullYear(),new Date().getMonth(),1,12);else S.month=new Date(S.month.getFullYear(),S.month.getMonth()+v,1,12);render();return}
   const wk=t.closest('[data-wk]');if(wk){const v=+wk.dataset.wk;if(v===0)S.week=addDays(new Date(),-new Date().getDay());else S.week=addDays(S.week,7*v);render();return}
+  const sj=t.closest('[data-subj]');if(sj){S.subj=sj.dataset.subj;render();return}
+  const td=t.closest('[data-ttd]');if(td){S.ttDay=+td.dataset.ttd;render();return}
   const act=t.closest('[data-act]');
   if(act){
     const a=act.dataset.act;
     if(a==='close')closeModal();
     else if(a==='install')installApp();
     else if(a==='export')exportModal();
+    else if(a==='print')window.print();
+    else if(a==='evics'){
+      const c=act.dataset.c;const e=(c==='staffevents'?S.staffEvents:S.events)[act.dataset.id];if(!e)return;
+      const sel=$('#x_alarm');if(sel)setAlarm(sel.value);
+      saveFile('event-'+e.date+'.ics',buildIcs([e],S.alarm),'text/calendar;charset=utf-8');toast('הקובץ ירד ✓ — פתחו אותו כדי להוסיף ליומן');
+    }
+    else if(a==='dlics'){
+      const sel=$('#x_alarm2');if(sel)setAlarm(sel.value);
+      const o=csvOpts();const yS=startOfHeYear(S.year);
+      const list=visibleEvents().filter(e=>e.date>=key(new Date(yS,8,1,12))&&e.date<=key(new Date(yS+1,7,31,12))&&o.types[e.type]).sort((x,y)=>x.date.localeCompare(y.date));
+      if(!list.length){toast('אין אירועים לייצוא');return}
+      saveFile('mofet-calendar.ics',buildIcs(list,S.alarm),'text/calendar;charset=utf-8');toast('הקובץ ירד ✓ — '+list.length+' אירועים');
+    }
     else if(a==='help')helpModal();
     else if(a==='manage')manageModal();
     else if(a==='setup')setupModal();
