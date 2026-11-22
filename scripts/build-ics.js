@@ -13,7 +13,9 @@ function parseCsv(t) { const rows = []; let row = [], cur = '', q = false; t = t
     else cur += c; }
   if (cur || row.length) { row.push(cur); rows.push(row); } return rows.filter(r => r.some(x => x && x.trim())); }
 function normDate(v) { v = String(v || '').trim(); let m = /^(\d{4})-(\d{1,2})-(\d{1,2})$/.exec(v); if (m) return m[1] + m[2].padStart(2, '0') + m[3].padStart(2, '0');
-  m = /^(\d{1,2})[\/.](\d{1,2})[\/.](\d{4})$/.exec(v); if (m) return m[3] + m[2].padStart(2, '0') + m[1].padStart(2, '0'); return ''; }
+  m = /^(\d{1,2})[\/.\-](\d{1,2})[\/.\-](\d{4})$/.exec(v); if (m) return m[3] + m[2].padStart(2, '0') + m[1].padStart(2, '0');
+  m = /^(\d{1,2})(\d{2})(\d{4})$/.exec(v.replace(/[,\s]/g, '')); if (m) return m[3] + m[2] + m[1].padStart(2, '0'); return ''; }
+function normTime(v) { v = String(v || '').trim().replace(/[,\s]/g, ''); if (!v) return ''; let m = /^(\d{1,2}):(\d{2})(?::\d{2})?$/.exec(v); if (m) return m[1].padStart(2, '0') + ':' + m[2]; m = /^(\d{1,2})(\d{2})$/.exec(v); if (m && +m[1] < 24 && +m[2] < 60) return m[1].padStart(2, '0') + ':' + m[2]; return ''; }
 const addDay = d => { const x = new Date(Date.UTC(+d.slice(0, 4), +d.slice(4, 6) - 1, +d.slice(6, 8) + 1)); return x.toISOString().slice(0, 10).replace(/-/g, ''); };
 const esc = x => String(x == null ? '' : x).replace(/\\/g, '\\\\').replace(/;/g, '\;').replace(/,/g, '\\,').replace(/\r?\n/g, '\\n');
 const fold = l => { const b = Buffer.from(l, 'utf8'); if (b.length <= 74) return l; const out = []; let cur = '', len = 0;
@@ -29,7 +31,7 @@ const get = async name => { const u = cfg.eventsSheetCsv.replace(/sheet=[^&]*/, 
     if (!classes.some(c => norm(c.name) === norm(name))) classes.push({ id: 'x' + h36(norm(name) + '_' + (heYear(year) || currentHeYear())), name }); } } catch (e) { console.log('classes tab:', e.message); }
   const events = [];
   const rows = await get('אירועים');
-  rows.forEach((r, i) => { const [title, type, date, end, st, en, cls, subj, place, notes] = r.map(x => (x || '').trim());
+  rows.forEach((r, i) => { const [title, type, date, end, st0, en0, cls, subj, place, notes] = r.map(x => (x || '').trim()); const st = normTime(st0), en = normTime(en0);
     const d = normDate(date); if (!title || !d) return;
     const t = TYPE[type] || ['other', '📌']; const ids = cls ? cls.split(/[,،;]/).map(x => (classes.find(c => norm(c.name) === norm(x)) || {}).id).filter(Boolean) : [];
     events.push({ title, emoji: t[1], d, ed: normDate(end), st, en, ids, subj, place, notes, cn: cls }); });

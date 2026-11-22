@@ -570,13 +570,14 @@ function parseCsv(t){
 }
 const TYPE_BY_NAME={'מבחן':'exam','בוחן':'quiz','הגשה':'hw','הגשת עבודה':'hw','טיול':'trip','סיור':'trip','אירוע':'event','טקס':'event','אסיפה':'parents','אסיפת הורים':'parents','שיחת הורים':'parents','חופשה':'vacation','אין לימודים':'vacation','אחר':'other'};
 const normName=x=>String(x||'').replace(/[׳'`"״]/g,'').replace(/\s+/g,'').trim();
-function normDate(v){v=String(v||'').trim();let m=/^(\d{4})-(\d{1,2})-(\d{1,2})$/.exec(v);if(m)return m[1]+'-'+pad(+m[2])+'-'+pad(+m[3]);m=/^(\d{1,2})[\/.](\d{1,2})[\/.](\d{4})$/.exec(v);if(m)return m[3]+'-'+pad(+m[2])+'-'+pad(+m[1]);return ''}
+function normDate(v){v=String(v||'').trim();let m=/^(\d{4})-(\d{1,2})-(\d{1,2})$/.exec(v);if(m)return m[1]+'-'+pad(+m[2])+'-'+pad(+m[3]);m=/^(\d{1,2})[\/.\-](\d{1,2})[\/.\-](\d{4})$/.exec(v);if(m)return m[3]+'-'+pad(+m[2])+'-'+pad(+m[1]);m=/^(\d{1,2})(\d{2})(\d{4})$/.exec(v.replace(/[,\s]/g,''));if(m)return m[3]+'-'+m[2]+'-'+pad(+m[1]);return ''}
+function normTime(v){v=String(v||'').trim().replace(/[,\s]/g,'');if(!v)return '';let m=/^(\d{1,2}):(\d{2})(?::\d{2})?$/.exec(v);if(m)return pad(+m[1])+':'+m[2];m=/^(\d{1,2})(\d{2})$/.exec(v);if(m&&+m[1]<24&&+m[2]<60)return pad(+m[1])+':'+m[2];return ''}
 function eventsFromSheet(text){
   const rows=parseCsv(text).filter(r=>r.some(x=>x&&x.trim()));
   const out={};
   rows.slice(1).forEach((r,i)=>{
-    const [title,type,date,end,st,en,cls,subj,place,notes]=r.map(x=>(x||'').trim());
-    const d=normDate(date);if(!title||!d)return;
+    const [title,type,date,end,st0,en0,cls,subj,place,notes]=r.map(x=>(x||'').trim());
+    const st=normTime(st0),en=normTime(en0);const d=normDate(date);if(!title||!d)return;
     const ids=cls?cls.split(/[,،;]/).map(x=>{const n=normName(x);const c=(cfg().classes||[]).find(c=>normName(c.name)===n);return c?c.id:null}).filter(Boolean):[];
     const e={id:'sh'+i,_c:'sheet',title,type:TYPE_BY_NAME[type]||'other',date,classIds:ids,subject:subj,place,notes,allDay:!st};
     const ed=normDate(end);if(ed&&ed>d)e.endDate=ed;if(st){e.start=st;e.end=en}
