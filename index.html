@@ -579,7 +579,7 @@ function eventsFromSheet(text){
     const [title,type,date,end,st0,en0,cls,subj,place,notes]=r.map(x=>(x||'').trim());
     const st=normTime(st0),en=normTime(en0);const d=normDate(date);if(!title||!d)return;
     const ids=cls?cls.split(/[,،;]/).map(x=>{const n=normName(x);const c=(cfg().classes||[]).find(c=>normName(c.name)===n);return c?c.id:null}).filter(Boolean):[];
-    const e={id:'sh'+i,_c:'sheet',title,type:TYPE_BY_NAME[type]||'other',date,classIds:ids,subject:subj,place,notes,allDay:!st};
+    const e={id:'sh'+i,_c:'sheet',title,type:TYPE_BY_NAME[type]||'other',date:d,classIds:ids,subject:subj,place,notes,allDay:!st};
     const ed=normDate(end);if(ed&&ed>d)e.endDate=ed;if(st){e.start=st;e.end=en}
     out[e.id]=e;
   });
@@ -641,9 +641,25 @@ function boot(){
   if(S.cls==='all'&&cs.length===1)S.cls=cs[0].id;
   render();
   if(S.cfg.eventsSheetCsv){
-    fetch(S.cfg.eventsSheetCsv).then(r=>r.ok?r.text():Promise.reject()).then(t=>{Object.assign(S.events,eventsFromSheet(t));render()}).catch(()=>{S.sheetErr=true;render()});
-    loadExtraSheets();
+    refreshSheet(true);
+    let last=Date.now();
+    const again=()=>{if(document.hidden)return;if(Date.now()-last<60000)return;last=Date.now();refreshSheet(false)};
+    document.addEventListener('visibilitychange',again);
+    window.addEventListener('focus',again);
+    setInterval(()=>{last=Date.now();if(!document.hidden)refreshSheet(false)},300000);
   }
+}
+let _sheetHash='';
+function refreshSheet(first){
+  const url=S.cfg.eventsSheetCsv+(S.cfg.eventsSheetCsv.includes('?')?'&':'?')+'_='+Date.now();
+  fetch(url,{cache:'no-store'}).then(r=>r.ok?r.text():Promise.reject()).then(t=>{
+    S.sheetErr=false;
+    if(!first&&t===_sheetHash)return;
+    _sheetHash=t;
+    Object.keys(S.events).forEach(id=>{if(S.events[id]._c==='sheet')delete S.events[id]});
+    Object.assign(S.events,eventsFromSheet(t));render();
+  }).catch(()=>{if(first){S.sheetErr=true;render()}});
+  if(first)loadExtraSheets();
 }
 /* =====================================================================
    4. שילוב עם יומן גוגל
