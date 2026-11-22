@@ -297,6 +297,40 @@ body{background:var(--bg) radial-gradient(900px 420px at 100% -80px,color-mix(in
 .dhint{font-size:12px;opacity:.75}
 @keyframes swR{from{opacity:0;transform:translateX(-26px)}to{opacity:1;transform:none}}
 @keyframes swL{from{opacity:0;transform:translateX(26px)}to{opacity:1;transform:none}}
+
+/* ===== כותרת קומפקטית, ניווט תחתון, חיפוש ===== */
+.hbtns{display:contents}
+.hfix{display:flex;gap:8px;align-items:center}
+.top .ttl{flex:1 1 170px;min-width:0}
+@media(max-width:1300px){.top .ttl small{display:none}}
+.top{gap:8px}.top .btn{padding:7px 11px;font-size:13.5px}.top .sel{padding:7px 10px;font-size:13.5px}
+.hmore{display:none;font-size:20px;line-height:1;padding:6px 14px}
+.bnav{display:none}
+@media(max-width:700px){
+  .hbtns{display:none}
+  .top.open .hbtns{display:flex;flex-wrap:wrap;gap:8px;width:100%;order:5}
+  .hmore{display:inline-flex}
+  .hfix{width:100%;justify-content:flex-end;margin-top:0}
+  .ttl small{display:none}
+  .tabs{display:none}
+  .bnav{display:flex;position:fixed;inset-inline:0;bottom:0;z-index:20;background:color-mix(in srgb,var(--card) 92%,transparent);backdrop-filter:blur(10px);border-top:1px solid var(--line);padding:6px 6px calc(6px + env(safe-area-inset-bottom));box-shadow:0 -4px 18px rgba(0,0,0,.08)}
+  .bn{flex:1;border:0;background:none;display:flex;flex-direction:column;align-items:center;gap:1px;padding:4px 0;border-radius:12px;color:var(--mute);font-size:19px}
+  .bn small{font-size:11px;font-weight:600}
+  .bn.on{background:color-mix(in srgb,var(--brand2) 14%,transparent);color:var(--brand)}
+  body{padding-bottom:78px}
+  .foot{margin-bottom:10px}
+}
+@media print{.bnav,.hfix{display:none!important}}
+.qin{width:100%;border:1.5px solid var(--line);border-radius:14px;padding:11px 14px;font:inherit;font-size:16px;background:var(--card);color:var(--ink);margin:6px 0 10px}
+.qin:focus{outline:2px solid var(--brand2);border-color:transparent}
+.qs{margin:10px 0 4px;font-size:12.5px;font-weight:700;color:var(--mute)}
+.qr{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:12px;cursor:pointer;text-align:start;width:100%;border:0;background:none;font:inherit;color:inherit}
+.qr:hover{background:var(--soft)}
+.qr small{display:block;color:var(--mute);font-size:12.5px}
+.qr .ic{font-size:20px}
+.steps{counter-reset:st;margin:8px 0 14px;padding:0;list-style:none}
+.steps li{counter-increment:st;position:relative;padding:8px 40px 8px 0;font-size:14.5px;line-height:1.5}
+.steps li::before{content:counter(st);position:absolute;inset-inline-start:auto;right:0;top:7px;width:26px;height:26px;border-radius:50%;background:var(--brand);color:#fff;font-weight:700;font-size:13px;display:grid;place-items:center}
 </style>
 </head>
 <body>
@@ -793,14 +827,16 @@ function render(){
   const classes=classesOfYear(S.year);
   const hasCfg=!!S.cfg;
   let h='';
-  h+='<div class="top"><img class="logo" src="logo.jpg" alt="ישיבת בני עקיבא חדרה"><div class="ttl"><h1>'+esc(cfg().program||'תוכנית מופת')+' · לוח שנה</h1><small>'+esc(cfg().school||'')+(cfg().school?' · ':'')+'תאריך עברי ולועזי · מערכת שעות · מבחנים · חופשות</small></div>';
+  h+='<div class="top'+(S.menu?' open':'')+'"><img class="logo" src="logo.jpg" alt="ישיבת בני עקיבא חדרה"><div class="ttl"><h1>'+esc(cfg().program||'תוכנית מופת')+' · לוח שנה</h1><small>'+esc(cfg().school||'')+(cfg().school?' · ':'')+'תאריך עברי ולועזי · מערכת שעות · מבחנים · חופשות</small></div>';
+  h+='<div class="hbtns">';
   h+='<select class="sel" id="yearSel" title="שנת לימודים">'+years.map(y=>'<option value="'+y+'"'+(y===S.year?' selected':'')+'>שנת הלימודים '+hYearStr(y)+'</option>').join('')+'</select>';
   if(!window.matchMedia('(display-mode: standalone)').matches&&!navigator.standalone)h+='<button class="btn" data-act="install">📲 התקנה בטלפון</button>';
   h+='<button class="btn" data-act="export">📅 ליומן גוגל</button>';
   h+='<button class="btn" data-act="print" title="הדפסה או שמירה כ-PDF">🖨️ הדפסה</button>';
   if(cfg().eventsSheetEdit)h+='<a class="btn" href="'+esc(cfg().eventsSheetEdit)+'" target="_blank" rel="noopener" title="לבעלי הרשאה: הוספת אירועים ומבחנים">✏️ ניהול אירועים</a>';
   if(S.isAdmin)h+='<button class="btn" data-act="manage">⚙️ ניהול כיתות</button>';
-  h+='<button class="btn ghost" data-act="help" title="איך זה עובד">❓</button>';
+  h+='</div>';
+  h+='<div class="hfix"><button class="btn ghost" data-act="search" title="חיפוש">🔍 חיפוש</button><button class="btn ghost hmore" data-act="menu" aria-expanded="'+(S.menu?'true':'false')+'">⋯</button><button class="btn ghost" data-act="help" title="עזרה">❓ עזרה</button></div>';
   h+='</div>';
     h+=heroHtml(classes);
   h+='<div class="dfilters">'+filtersHtml(classes)+'</div>';
@@ -808,6 +844,7 @@ function render(){
   h+=briefHtml();
   const tabs=[['agenda','📋 הקרוב'],['month','🗓️ חודש'],['week','📆 שבוע'],['tt','⏰ מערכת שעות'],['exams','📝 מבחנים והגשות'],['vac','🏖️ חופשות וחגים']];
   h+='<div class="tabs">'+tabs.map(t=>'<button class="tab'+(S.tab===t[0]?' on':'')+'" data-tab="'+t[0]+'">'+t[1]+'</button>').join('')+'</div>';
+  h+='<nav class="bnav" aria-label="ניווט">'+tabs.map(t=>{const a=t[1].split(' ');return '<button class="bn'+(S.tab===t[0]?' on':'')+'" data-tab="'+t[0]+'"><span>'+a[0]+'</span><small>'+({'agenda':'הקרוב','month':'חודש','week':'שבוע','tt':'מערכת','exams':'מבחנים','vac':'חופשות'})[t[0]]+'</small></button>'}).join('')+'</nav>';
   h+=(S.tab==='month'||S.tab==='week'||S.tab==='agenda'?legendHtml():'')+'<div id="view">'+viewHtml()+'</div>';
   h+='<div class="foot">תוכנית מופת · תאריכים עבריים מחושבים אוטומטית · חופשות לפי לוח משרד החינוך · לעדכון הלוח פנו למחנך</div>';
   app.innerHTML=h;
@@ -895,7 +932,7 @@ function todayCardHtml(){
     const L=lessonsFor(S.cls,now.getDay());
     if(L.length)les='<div class="lessons">'+L.map(x=>'<span class="les"><b>'+(x.i+1)+'</b> '+esc(x.c.s)+'</span>').join('')+'</div>';
   }
-  const nav='<div class="dnav"><button class="dn" data-hd="1" title="היום הבא" aria-label="היום הבא">›</button>'+(n!==0?'<button class="dn dn0" data-hd="0">חזרה להיום</button>':'<span class="dhint">החליקו ימינה למחר</span>')+'<button class="dn" data-hd="-1" title="היום הקודם" aria-label="היום הקודם">‹</button></div>';
+  const nav='<div class="dnav"><button class="dn" data-hd="1" title="היום הבא" aria-label="היום הבא">›</button>'+(n!==0?'<button class="dn dn0" data-hd="0">חזרה להיום</button>':'<span class="dhint">החליקו ימינה למחר</span>')+'<button class="dn" data-act="shareday" title="שיתוף סיכום היום בוואטסאפ" aria-label="שיתוף סיכום היום" style="font-size:15px">📤</button><button class="dn" data-hd="-1" title="היום הקודם" aria-label="היום הקודם">‹</button></div>';
   return '<div class="card today"><div class="lbl">'+dayLabel(n)+' · '+WD[now.getDay()]+'</div><div class="hb">'+hStr(now,{year:true})+'</div><div class="gr">'+gStr(now,{year:true})+'</div><div class="tags">'+tags+'</div>'+(n===0?nowNextHtml():'')+(evs.length?'<div class="tags">'+evs.map(e=>'<span class="tag">'+(TYPES[e.type]?TYPES[e.type].e:'')+' '+esc(e.title)+'</span>').join('')+'</div>':'')+les+nav+'</div>';
 }
 function updateToday(dir){
@@ -1321,9 +1358,62 @@ async function installApp(){
   h+='<div class="acts"><button class="btn primary" data-act="close">הבנתי</button></div>';
   openModal(h);
 }
+
+function dayShareText(){
+  const base=new Date();base.setHours(12,0,0,0);const n=S.hd||0;const d=addDays(base,n);
+  const di=dayInfo(d,rules());const off=isOffForClass(d);
+  const c=S.cls!=='all'?clsById(S.cls):null;
+  let t='📅 *'+dayLabel(n)+' · יום '+WD[d.getDay()]+'*\n'+gStr(d,{year:true})+' · '+hStr(d)+(c?'\nכיתה '+c.name:'')+'\n';
+  const hol=di.items.filter(x=>x.t!=='school').map(x=>x.n);
+  if(hol.length)t+='\n🕯️ '+hol.join(', ');
+  if(off)t+='\n🏖️ אין לימודים';
+  else if(c&&!di.shabbat){
+    const L=lessonsFor(S.cls,d.getDay());
+    if(L.length)t+='\n⏰ *מערכת*\n'+L.map(x=>(x.i+1)+'. '+x.c.s+(x.p&&x.p.s?' ('+x.p.s+')':'')).join('\n')+'\n';
+  }
+  const ev=eventsOn(key(d));
+  if(ev.length)t+='\n📌 *אירועים*\n'+ev.map(e=>((TYPES[e.type]||TYPES.other).e)+' '+e.title+(e.start&&!e.allDay?' · '+e.start:'')+(e.place?' · '+e.place:'')).join('\n')+'\n';
+  t+='\nלוח '+(cfg().program||'מופת')+': '+location.href.split('#')[0].split('?')[0];
+  return t;
+}
+function searchModal(){
+  openModal('<h2>🔍 חיפוש</h2><div class="sub">אירועים, מורים, מקצועות וחגים</div><input id="qIn" class="qin" type="search" placeholder="הקלידו לחיפוש…" autocomplete="off"><div id="qRes"></div><div class="acts"><button class="btn ghost" data-act="close">סגירה</button></div>');
+  const i=document.getElementById('qIn');if(i)setTimeout(()=>i.focus(),50);
+  runSearch('');
+}
+function runSearch(q){
+  const out=document.getElementById('qRes');if(!out)return;
+  q=normName(q);
+  if(!q){out.innerHTML='<div class="hint" style="padding:8px 2px">למשל: מבחן, תנ״ך, שם של מורה, חנוכה</div>';return}
+  let h='';
+  // אירועים
+  const all=Object.values(S.events).concat(S.isStaff?Object.values(S.staffEvents):[]).filter(e=>e&&e.date);
+  const ev=all.filter(e=>normName([e.title,e.subject,e.place,e.notes,(TYPES[e.type]||{}).n].join(' ')).includes(q)).sort((a,b)=>a.date.localeCompare(b.date)).slice(0,12);
+  if(ev.length)h+='<div class="qs">אירועים</div>'+ev.map(e=>{const T=TYPES[e.type]||TYPES.other;return '<button class="qr" data-ev="'+esc(e.id)+'" data-c="'+esc(e._c)+'"><span class="ic">'+T.e+'</span><span>'+esc(e.title)+'<small>'+gStr(fromKey(e.date),{wd:true,year:true})+' · '+hStr(fromKey(e.date))+(e.subject?' · '+esc(e.subject):'')+'</small></span></button>'}).join('');
+  // מקצועות ומורים
+  const subs={};const tch={};
+  (cfg().classes||[]).forEach(c=>{const t=S.tt[c.id];if(t&&t.cells)Object.values(t.cells).forEach(x=>{if(!x)return;if(x.s)subs[normName(x.s)]=x.s;if(x.t){const k=normName(x.t);(tch[k]=tch[k]||{name:x.t,subs:new Set()});if(x.s)tch[k].subs.add(x.s)}})});
+  (cfg().teachers||[]).forEach(t=>{const k=normName(t.name);(tch[k]=tch[k]||{name:t.name,subs:new Set()});tch[k].email=t.email;tch[k].whatsapp=t.whatsapp;String(t.subject||'').split(/[,،;]/).forEach(x=>x.trim()&&tch[k].subs.add(x.trim()))});
+  const sj=Object.values(subs).filter(x=>normName(x).includes(q)).slice(0,8);
+  if(sj.length)h+='<div class="qs">מקצועות · לחיצה מסננת את הלוח</div>'+sj.map(x=>'<button class="qr" data-subj="'+esc(x)+'" data-close="1"><span class="ic">📚</span><span>'+esc(x)+'</span></button>').join('');
+  const th=Object.values(tch).filter(t=>normName(t.name).includes(q)||[...t.subs].some(x=>normName(x).includes(q))).slice(0,8);
+  if(th.length)h+='<div class="qs">מורים</div>'+th.map(t=>'<div class="qr" style="cursor:default"><span class="ic">🧑‍🏫</span><span style="flex:1">'+esc(t.name)+'<small>'+esc([...t.subs].join(', '))+'</small></span>'+(t.whatsapp?'<a class="btn wa sm" target="_blank" rel="noopener" href="'+esc(waLink(t.whatsapp,'שלום, אני פונה בעניין '+([...t.subs][0]||'הכיתה')+': '))+'">💬</a>':'')+(t.email?'<a class="btn sm" href="mailto:'+esc(t.email)+'">✉️</a>':'')+'</div>').join('');
+  // חגים וחופשות (בשנת הלימודים הנבחרת)
+  const hs=[];const y0=startOfHeYear(S.year);const seen={};
+  for(let i=0;i<366&&hs.length<8;i++){const d=new Date(y0,8,1+i,12);for(const it of dayInfo(d,rules()).items){if(it.t==='school'||it.t==='rc')continue;const kk=it.g||it.n;if(seen[kk]||!normName(it.n).includes(q))continue;seen[kk]=1;hs.push({n:it.n,d})}}
+  if(hs.length)h+='<div class="qs">חגים וחופשות</div>'+hs.map(x=>'<div class="qr" style="cursor:default"><span class="ic">'+(holIcon(x.n).replace(/<[^>]+>/g,'')||'🗓️')+'</span><span>'+esc(x.n)+'<small>'+gStr(x.d,{wd:true,year:true})+' · '+hStr(x.d)+'</small></span></div>').join('');
+  out.innerHTML=h||'<div class="hint" style="padding:8px 2px">לא נמצאו תוצאות.</div>';
+}
 function helpModal(){
-  let h='<h2>איך זה עובד?</h2><div class="sub">לוח פתוח לצוות ולהורים, בלי הרשמה</div>';
-  h+='<div class="kv"><b>כיתה</b><span>בחרו את הכיתה בשורת הכפתורים — המערכת, האירועים והמבחנים יסוננו לכיתה שלכם.</span><b>תאריכים</b><span>בכל יום מוצגים התאריך העברי והלועזי. חגים וחופשות מחושבים לפי הלוח העברי.</span><b>יומן גוגל</b><span>לחצו על אירוע ← "הוספה ליומן גוגל שלי" והוא יישמר ביומן הפרטי שלכם. את כל הלוח אפשר לייבא מקובץ בכפתור "ליומן גוגל".</span><b>פנייה לצוות</b><span>מתחת לבחירת הכיתה: מייל או וואטסאפ למחנך ולרכזת התוכנית.</span></div>';
+  let h='<h2>❓ עזרה</h2><div class="sub">לוח פתוח לצוות ולהורים, בלי הרשמה</div>';
+  h+='<h3 style="margin:12px 0 2px;font-size:15px">מדריך קצר להורים חדשים</h3><ol class="steps">'
+    +'<li><b>בוחרים כיתה.</b> לוחצים על הכיתה שלכם מתחת לכרטיס היום, והמערכת, האירועים והמבחנים יסוננו אליה.</li>'
+    +'<li><b>מתקינים בטלפון.</b> בכפתור "📲 התקנה בטלפון" האתר נשמר במסך הבית כמו אפליקציה, עם הסמל של הישיבה.</li>'
+    +'<li><b>מצטרפים ליומן.</b> בכפתור "📅 ליומן גוגל" יש מנוי אחד שמעדכן את היומן שלכם לבד כשמתווספים אירועים. אפשר גם להוסיף אירוע בודד, עם תזכורת.</li>'
+    +'<li><b>מסננים לפי מקצוע.</b> לחיצה על מקצוע תציג רק את המבחנים והשיעורים שלו, ותוסיף שורת פנייה למורה.</li>'
+    +'<li><b>מחליקים בין ימים.</b> בכרטיס היום מחליקים ימינה למחר, וגם 📤 משתף סיכום יום בוואטסאפ.</li>'
+    +'<li><b>פונים לצוות.</b> מתחת לכרטיס היום יש מייל ווואטסאפ למחנך, לרכזת ולמורה של המקצוע שנבחר.</li></ol>';
+  h+='<div class="kv"><b>חיפוש</b><span>הכפתור "🔍 חיפוש" מוצא אירוע, מורה, מקצוע או חג.</span><b>תאריכים</b><span>בכל יום מוצגים התאריך העברי והלועזי. חגים וחופשות מחושבים לפי הלוח העברי.</span><b>הדפסה</b><span>"🖨️ הדפסה" שומר את התצוגה הנוכחית כ-PDF או מדפיס אותה.</span></div>';
   h+='<div class="acts"><button class="btn primary" data-act="close">הבנתי</button></div>';
   openModal(h);
 }
@@ -1333,12 +1423,12 @@ function helpModal(){
    ===================================================================== */
 document.addEventListener('click',async ev=>{
   const t=ev.target;
-  const tab=t.closest('[data-tab]');if(tab){S.tab=tab.dataset.tab;render();return}
+  const tab=t.closest('[data-tab]');if(tab){S.tab=tab.dataset.tab;render();if(tab.classList.contains('bn')){const v=document.getElementById('view');if(v)window.scrollTo({top:v.getBoundingClientRect().top+scrollY-70})}return}
   const cl=t.closest('[data-cls]');if(cl){S.cls=cl.dataset.cls;savePrefs();render();return}
   const mon=t.closest('[data-mon]');if(mon){const v=+mon.dataset.mon;if(v===0)S.month=new Date(new Date().getFullYear(),new Date().getMonth(),1,12);else S.month=new Date(S.month.getFullYear(),S.month.getMonth()+v,1,12);render();return}
   const wk=t.closest('[data-wk]');if(wk){const v=+wk.dataset.wk;if(v===0)S.week=addDays(new Date(),-new Date().getDay());else S.week=addDays(S.week,7*v);render();return}
   const hdb=t.closest('[data-hd]');if(hdb){const v=+hdb.dataset.hd;const old=S.hd||0;S.hd=v===0?0:Math.max(-7,Math.min(45,old+v));updateToday(v===0?(old>0?-1:1):v);return}
-  const sj=t.closest('[data-subj]');if(sj){S.subj=sj.dataset.subj;render();return}
+  const sj=t.closest('[data-subj]');if(sj){S.subj=sj.dataset.subj;if(sj.dataset.close)closeModal();render();return}
   const td=t.closest('[data-ttd]');if(td){S.ttDay=+td.dataset.ttd;render();return}
   const act=t.closest('[data-act]');
   if(act){
@@ -1347,6 +1437,9 @@ document.addEventListener('click',async ev=>{
     else if(a==='install')installApp();
     else if(a==='export')exportModal();
     else if(a==='print')window.print();
+    else if(a==='menu'){S.menu=!S.menu;render()}
+    else if(a==='search')searchModal();
+    else if(a==='shareday')window.open('https://wa.me/?text='+encodeURIComponent(dayShareText()),'_blank','noopener');
     else if(a==='evics'){
       const c=act.dataset.c;const e=(c==='staffevents'?S.staffEvents:S.events)[act.dataset.id];if(!e)return;
       const sel=$('#x_alarm');if(sel)setAlarm(sel.value);
@@ -1442,6 +1535,7 @@ document.addEventListener('change',ev=>{
   document.addEventListener('mousedown',e=>{if(e.button===0&&!e.target.closest('button,a'))start(e.clientX,e.clientY,e.target)});
   document.addEventListener('mouseup',e=>end(e.clientX,e.clientY));
 })();
+document.addEventListener('input',e=>{if(e.target&&e.target.id==='qIn')runSearch(e.target.value)});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
 boot();
 </script>
